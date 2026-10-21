@@ -1,3 +1,29 @@
+# Jitsi Meet Deployment for Coolify
+
+> **Domain**: https://jitsi-meet.daveang.store  
+> **Server IP**: 145.79.11.133  
+> **Managed by**: Coolify PaaS (Docker Compose)
+
+---
+
+## 🚀 Coolify 部署步骤 (Deployment on Coolify)
+
+1. **新建应用 (New Resource)**：
+   - 在 Coolify 面板中选择你的 Project / Environment。
+   - 点击 **+ New Resource** -> 选择 **Public Repository** 或 **Git Repository**。
+   - 填入仓库地址：`https://github.com/DaveAng008/jistimeet`。
+   - 构建类型选择 **Docker Compose**。
+2. **域名绑定 (Domain)**：
+   - 在 `web` 服务配置中设置域名为：`https://jitsi-meet.daveang.store`。
+   - 端口指向容器端口 `8000`。
+3. **防火墙配置 (Firewall / Security Group)**：
+   - **UDP 10000**：必须在云服务商防火墙与宿主机中完全放行（WebRTC 音视频媒体流直连）。
+   - **TCP 80 & 443**：放行（网页访问与 SSL 证书申请）。
+4. **环境变量 (Environment Variables)**：
+   - 仓库内已包含配置好的 `.env` 文件（包含强随机生成的内部组件通信密钥及公网 IP）。
+
+---
+
 # Jitsi Meet on Docker
 
 ![](resources/jitsi-docker.png)

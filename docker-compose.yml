@@ -19,6 +19,9 @@ services:
             - ./custom/custom-interface_config.js:/config/custom-interface_config.js:ro
             - ./custom/watermark.svg:/usr/share/jitsi-meet/images/watermark.svg:ro
             - ./custom/favicon.svg:/usr/share/jitsi-meet/images/favicon.svg:ro
+            - ./custom/title.html:/usr/share/jitsi-meet/title.html:ro
+            - ./custom/main-zh-CN.json:/usr/share/jitsi-meet/lang/main-zh-CN.json:ro
+            - ./custom/main.json:/usr/share/jitsi-meet/lang/main.json:ro
         labels:
             service: "jitsi-web"
         environment:

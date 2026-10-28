@@ -16,6 +16,9 @@ services:
             - ${CONFIG}/web/custom-ca:/usr/local/share/ca-certificates:ro,z
             - ${CONFIG}/storage/transcripts:/usr/share/jitsi-meet/transcripts:ro,z
             - ${CONFIG}/tmp/web-load-test:/usr/share/jitsi-meet/load-test:Z
+            - ./custom/custom-interface_config.js:/config/custom-interface_config.js:ro
+            - ./custom/watermark.svg:/usr/share/jitsi-meet/images/watermark.svg:ro
+            - ./custom/favicon.svg:/usr/share/jitsi-meet/images/favicon.svg:ro
         labels:
             service: "jitsi-web"
         environment:

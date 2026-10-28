@@ -1,7 +1,13 @@
 services:
     # Frontend
     web:
-        image: ${JITSI_IMAGE_REPO:-ghcr.io/jitsi}/web:${JITSI_IMAGE_VERSION:-unstable}
+        image: jistimeet-web:latest
+        build:
+            context: .
+            dockerfile: Dockerfile.web
+            args:
+                JITSI_IMAGE_REPO: ${JITSI_IMAGE_REPO:-ghcr.io/jitsi}
+                JITSI_IMAGE_VERSION: ${JITSI_IMAGE_VERSION:-stable}
         restart: ${RESTART_POLICY:-unless-stopped}
         read_only: true
         tmpfs:
@@ -16,12 +22,6 @@ services:
             - ${CONFIG}/web/custom-ca:/usr/local/share/ca-certificates:ro,z
             - ${CONFIG}/storage/transcripts:/usr/share/jitsi-meet/transcripts:ro,z
             - ${CONFIG}/tmp/web-load-test:/usr/share/jitsi-meet/load-test:Z
-            - ./custom/custom-interface_config.js:/config/custom-interface_config.js:ro
-            - ./custom/watermark.svg:/usr/share/jitsi-meet/images/watermark.svg:ro
-            - ./custom/favicon.svg:/usr/share/jitsi-meet/images/favicon.svg:ro
-            - ./custom/title.html:/usr/share/jitsi-meet/title.html:ro
-            - ./custom/main-zh-CN.json:/usr/share/jitsi-meet/lang/main-zh-CN.json:ro
-            - ./custom/main.json:/usr/share/jitsi-meet/lang/main.json:ro
         labels:
             service: "jitsi-web"
         environment:

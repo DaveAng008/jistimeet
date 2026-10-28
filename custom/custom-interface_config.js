@@ -7,6 +7,7 @@ interfaceConfig.JITSI_WATERMARK_LINK = 'https://jitsi-meet.daveang.store';
 
 // 2. 显示左上角专属品牌 Logo 水印
 interfaceConfig.SHOW_JITSI_WATERMARK = true;
+interfaceConfig.DEFAULT_LOGO_URL = 'images/watermark.svg';
 
 // 3. 自定义品牌与应用名称
 interfaceConfig.APP_NAME = '创业说明会';

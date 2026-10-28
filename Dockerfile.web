@@ -1,0 +1,22 @@
+ARG JITSI_IMAGE_REPO=ghcr.io/jitsi
+ARG JITSI_IMAGE_VERSION=stable
+FROM ${JITSI_IMAGE_REPO}/web:${JITSI_IMAGE_VERSION}
+
+USER root
+
+# 1. 替换专属品牌 Logo 与 Favicon 网站图标 (创业说明会 · 富人思维)
+COPY custom/watermark.svg /usr/share/jitsi-meet/images/watermark.svg
+COPY custom/favicon.svg /usr/share/jitsi-meet/images/favicon.svg
+
+# 2. 注入专属网页 Title 及社交分享元数据
+COPY custom/title.html /usr/share/jitsi-meet/title.html
+
+# 3. 注入“创业说明会”语言包 (包含欢迎页、预加入会议等全部定制文案)
+COPY custom/main-zh-CN.json /usr/share/jitsi-meet/lang/main-zh-CN.json
+COPY custom/main.json /usr/share/jitsi-meet/lang/main.json
+
+# 4. 注入界面自定义配置并追加至系统默认配置，保证无需外部挂载即可生效
+COPY custom/custom-interface_config.js /defaults/custom-interface_config.js
+RUN cat /defaults/custom-interface_config.js >> /defaults/interface_config.js
+
+USER s6
